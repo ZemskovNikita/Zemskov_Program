@@ -10,24 +10,24 @@ using namespace std;
  * \return значение табуляции.
 */
 double Tabulation(const double x);
-/**
- * \brief Возможность выполнения функции.
- * \return в случае успеха, возвращает 1.
-*/
-bool Luck(const double x);
+
 
 /**
  * \brief Вход в программу.
  * \return в случае успеха, возвращает 0.
 */
 int main() {
+	setlocale(0, "");
 	double x = 1.0;
 	const auto z = 3;
 	const auto step = 0.2;
+	double eps = 0.00000001;
 
-	for (x; x <= z; x += step) {
-		if (Luck(x))
-			cout << "x: " << x << " y: " << Tabulation(x) << endl;
+	for (x; x <= z + eps; x += step) {
+		if (x > 0)
+		cout << "x: " << x << " y: " << Tabulation(x) << endl;
+		else
+			cout << "в точке x = " << x << " невозможно найти значение функции" << endl;
 	}
 
 	system("pause");
@@ -37,6 +37,4 @@ int main() {
 double Tabulation(double x) {
 	return sin(log(x)) - cos(log(x)) + 2 * log(x);
 }
-bool Luck(double x) {
-	return 1 / (sin(log(x)) - cos(log(x)) + 2 * log(x)) != 0;
-}
+
