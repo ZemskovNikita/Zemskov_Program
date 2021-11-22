@@ -32,7 +32,7 @@ void Print(int* array, const int size);
  * \brief Проверка индекса элемента на четность
  * \param i Индекс массива
  */
-bool Even(const int i);
+bool IsEven(const int i);
 
 /**
  * \brief Уничтожает массив
@@ -76,12 +76,12 @@ int main() {
     const auto right_bound = -1000;
     const auto left_bound = 1000;
 
-    int size;
+    int size_t;
     cout << "Введите размер массива\n";
-    cin >> size;
+    cin >> size_t;
 
     int* array;
-    array = new int[size];
+    array = new int[size_t];
 
     int choice;
     cout << "Введите как заполнять массив, 1-ввод с клавиатуры, 2-рандомные числа\n";
@@ -90,21 +90,22 @@ int main() {
     const auto value = static_cast<Value>(choice);
     switch (value) {
     case Value::KEYBOARD:
-        inputValue(array, size);
-        Print(array, size);
+        inputValue(array, size_t);
+        Print(array, size_t);
         break;
     case Value::RANDOM:
-        Random(array, size, right_bound, left_bound);
-        Print(array, size);
+        Random(array, size_t, right_bound, left_bound);
+        Print(array, size_t);
         break;
     default:
         cout << "Ввели не корректное значение!!!!'\n'";
 
     }
 
-    cout <<"Сумма четных элементов: " <<Sum(array, size) << endl;
-    cout <<"Количество элементов массива, значения которых состоят из двух цифр: " <<Element(array, size) << endl;
-    cout <<"Заменить последний отрицательный элемент массива на модуль первого элемента массива: " <<lastNegativeElemen(array, size) << endl;
+    cout <<"Сумма четных элементов: " <<Sum(array, size_t) << endl;
+    cout <<"Количество элементов массива, значения которых состоят из двух цифр: " <<Element(array, size_t) << endl;
+    cout <<"Заменить последний отрицательный элемент массива на модуль первого элемента массива: " <<lastNegativeElemen(array, size_t) << endl;
+    Print(array, size_t);
     system("pause");
     Destroy(array);
     return 0;
@@ -132,9 +133,9 @@ void Random(int* array, const int size, const int right_bound, const int left_bo
 void Print(int* array, const int size) {
     cout << "Массив [" << size << "]" << "= {";
     for (size_t i = 0; i < size; i++) {
-        cout << array[i] << "; " << setw(3);
+        cout << array[i] << " " << setw(3);
     }
-    cout << array[size - 1] << "}" << endl;
+    cout << "}" << endl;
 }
 
 void Destroy(int* array) {
@@ -144,7 +145,7 @@ void Destroy(int* array) {
     }
 }
 
-bool Even(const int a) {
+bool IsEven(const int a) {
     return a % 2 == 0;
 }
 
@@ -152,7 +153,7 @@ bool Even(const int a) {
 int Sum(int* array, const int size) {
     double sum = 0;
     for (size_t i = 0; i < size; i++) {
-        if (Even(array[i]))
+        if (IsEven(array[i]))
             sum += array[i];
     }
     return sum;
@@ -168,11 +169,10 @@ int Element(int* array, const int size) {
 }
 
 int lastNegativeElemen(int* array, const int size) {
-    int min_i = 0;
-    for (size_t i = 0; i < size; i++) {
+    int i = size;
+    for (int i = size; i >= 0; i--) {
         if (array[i] < 0)
-            min_i = i;
+            array[i] = abs(array[0]);
+        return array[i];
     }
-    array[min_i] = abs(array[0]);
-    return array[min_i];
 }
