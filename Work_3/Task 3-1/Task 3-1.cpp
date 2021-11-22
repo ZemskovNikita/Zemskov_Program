@@ -10,6 +10,7 @@ using namespace std;
  * \return значение табуляции.
 */
 double Tabulation(const double x);
+void Сalculation(double x, const int z, const double eps, const double step);
 
 
 /**
@@ -19,16 +20,11 @@ double Tabulation(const double x);
 int main() {
 	setlocale(0, "");
 	double x = 1.0;
-	const auto z = 3;
-	const auto step = 0.2;
+	const int z = 3;
+	const double step = 0.2;
 	double eps = 0.00000001;
 
-	for (x; x <= z + eps; x += step) {
-		if (x > 0)
-		cout << "x: " << x << " y: " << Tabulation(x) << endl;
-		else
-			cout << "в точке x = " << x << " невозможно найти значение функции" << endl;
-	}
+	Сalculation(x, z, eps, step);
 
 	system("pause");
 	return 0;
@@ -38,3 +34,11 @@ double Tabulation(double x) {
 	return sin(log(x)) - cos(log(x)) + 2 * log(x);
 }
 
+void Сalculation(double x, const int z, const double eps, const double step) {
+	for (x; x <= z + eps; x += step) {
+		if (x > 0)
+			cout << "x: " << x << " y: " << Tabulation(x) << endl;
+		else
+			cout << "в точке x = " << x << " невозможно найти значение функции" << endl;
+	}
+}
