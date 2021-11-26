@@ -62,7 +62,9 @@ int Element(int* array, const int size);
 * \param size Размер масива
 * \\return Возвращает последний отрицательный элемент массива на модуль первого элемента массива.
 */
-int lastNegativeElemen(int* array, const int size);
+void lastNegativeElemen(int* array, const int size);
+
+
 
 enum class Value {
     NONE,
@@ -104,8 +106,8 @@ int main() {
 
     cout <<"Сумма четных элементов: " <<Sum(array, size_t) << endl;
     cout <<"Количество элементов массива, значения которых состоят из двух цифр: " <<Element(array, size_t) << endl;
-    cout <<"Заменить последний отрицательный элемент массива на модуль первого элемента массива: " <<lastNegativeElemen(array, size_t) << endl;
-    Print(array, size_t);
+    cout <<"Заменить последний отрицательный элемент массива на модуль первого элемента массива: " << endl;
+    lastNegativeElemen(array, size_t);
     system("pause");
     Destroy(array);
     return 0;
@@ -145,8 +147,8 @@ void Destroy(int* array) {
     }
 }
 
-bool IsEven(const int a) {
-    return a % 2 == 0;
+bool IsEven(const int i) {
+    return i % 2 == 0;
 }
 
 
@@ -168,11 +170,13 @@ int Element(int* array, const int size) {
     return count;
 }
 
-int lastNegativeElemen(int* array, const int size) {
-    int i = size;
-    for (int i = size; i >= 0; i--) {
-        if (array[i] < 0)
+void lastNegativeElemen(int* array, const int size) {
+    int a = 0;
+    for (int i = size - 1; i >= 0; i--) {
+        if (array[i] < 0 && a == 0){
+            a++;
             array[i] = abs(array[0]);
-        return array[i];
+        }
     }
+    Print(array, size);
 }
