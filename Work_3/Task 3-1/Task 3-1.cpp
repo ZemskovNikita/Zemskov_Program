@@ -5,11 +5,19 @@ using namespace std;
 
 
 /**
- * \brief функция для расчета заначений табуляции.
+ * \brief функция для расчета значений табуляции.
  * \x начало интервала.
  * \return значение табуляции.
 */
 double Tabulation(const double x);
+
+/**
+ * \brief функция для расчета значений табуляции.
+ * \x начало интервала.
+ * \z конец интервала.
+ * \eps эпислент.
+ * \step шаг.
+*/
 void Сalculation(double x, const int z, const double eps, const double step);
 
 
