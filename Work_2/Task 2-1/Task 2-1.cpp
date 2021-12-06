@@ -1,14 +1,13 @@
 ﻿#include <iostream>
-#include <string>
-#include <clocale>
-
+#include <cmath>
+#include <random>
+#include <iomanip>
 using namespace std;
 
-
 /**
-* \brief Перечисляемый тип вычеслений, для которых считаем сумму, разность, произведение, частное.
+* \brief Выбор полбзоваателя, будем считать сумму, разность, произведение или частное.
 */
-enum class Result {
+enum class Choice {
 
 
 	/**
@@ -18,25 +17,25 @@ enum class Result {
 
 
 	/**
-	* \brief расчет --- сумма чисел.
+	* \brief расчет суммы чисел.
 	*/
 	sum,
 
 
 	/**
-	* \brief расчет --- разности чисел.
+	* \brief расчет разности чисел.
 	*/
 	difference,
 
 
 	/**
-	* \brief расчет --- произведения чисел.
+	* \brief расчет произведения чисел.
 	*/
 	product,
 
 
 	/**
-	* \brief расчет --- частного чисел.
+	* \brief расчет частного чисел.
 	*/
 	quotient,
 };
@@ -44,126 +43,101 @@ enum class Result {
 /**
  * \brief Функция расчета суммы чисел.
  * \param число "a".
- * \return сумма.
+ * \param число "b".
  */
-double GetSumOfNumbers(const double a, const double b);
+void GetSumOfNumbers(const double a, const double b);
 
 /**
  * \brief Функция расчета разности чисел.
  * \param число "a".
- * \return разность.
+ * \param число "b".
  */
-double GetDifferenceOfNumbers(const double a, const double b);
+void GetDifferenceOfNumbers(const double a, const double b);
 
 /**
  * \brief Функция расчета произведения чисел.
  * \param число "a".
- * \return произведение.
+ * \param число "b".
  */
-double GetProductOfNumbers(const double a, const double b);
+void GetMultiplicationOfNumbers(const double a, const double b);
 
 /**
  * \brief Функция расчета частного чисел.
  * \param число "a".
- * \return частное
+ * \param число "b".
  */
-double GetQuotientOfNumbers(const double a, const double b);
+void GetDivisionOfNumbers(const double a, const double b);
 
 /**
- * \brief Ввод самого числа.
- * \param message Разъясняющая надпись.
- * \param out Произвольный поток вывода.
- * \param in Произвольный поток ввода.
- * \return численное значение.
+ * \brief Ввод первого числа.
  */
-double WriteaANumber(const string& message = "", ostream& out = cout, istream& in = cin);
+double WriteaFirstNumber();
 
 /**
- * \brief
- * \param message Сообщение для пользователя.
- * \param out Произвольный поток вывода.
- * \param in Произвольный поток ввода.
- * \return то что выбрал пользователь.
+ * \brief Ввод второго числа.
  */
-Result ReadUserChoice(const string& message = "", ostream& out = cout, istream& in = cin);
+double WriteaSecondNumber();
 
 
 int main() {
 	setlocale(LC_ALL, "Russian");
 
-	const auto message = "Выберите что посчитать: "
-		+ to_string(static_cast<int>(Result::sum)) + " - сумма,"
-		+ to_string(static_cast<int>(Result::difference)) + " - разность,"
-		+ to_string(static_cast<int>(Result::product)) + " - произведнение,"
-		+ to_string(static_cast<int>(Result::quotient)) + " - частное\n";
+	const double a = WriteaFirstNumber();
+	const double b = WriteaSecondNumber();
 
-	const auto result = ReadUserChoice(message);
 
-	switch (result) {
-	case Result::sum: {
-		const auto number_1 = WriteaANumber("Введите число = ");
-		const auto number_2 = WriteaANumber("Введите число = ");
+	cout << " Цифра 1 -- Вычисляет сумму " << endl;
+	cout << " Цифра 2 -- Вычисляет разность" << endl;
+	cout << " Цифра 3 -- Вычисляет произведение" << endl;
+	cout << " Цифра 4 -- Вычисляет частное" << endl;
 
-		const auto Sum = GetSumOfNumbers(number_1, number_2);
-		cout << "\nСумма " << Sum << endl;
+	int count = 0;
+	cin >> count;
+	const auto value = static_cast<Choice>(count);
+	switch (value) {
+	case Choice::sum:
+		GetSumOfNumbers(a, b);
 		break;
-	}
-	case Result::difference: {
-		const auto number_1 = WriteaANumber("Введите число = ");
-		const auto number_2 = WriteaANumber("Введите число = ");
-		
-		const auto difference = GetDifferenceOfNumbers(number_1, number_2);
-		cout << "\nРасзность " << difference << endl;
+	case Choice::difference:
+		GetDifferenceOfNumbers(a, b);
 		break;
-	}
-	case Result::product: {
-		const auto number_1 = WriteaANumber("Введите число = ");
-		const auto number_2 = WriteaANumber("Введите число = ");
-		
-		const auto product = GetProductOfNumbers(number_1, number_2);
-		cout << "\nПроизведение " << product << endl;
+	case Choice::product:
+		GetMultiplicationOfNumbers(a, b);
 		break;
-	}
-	case Result::quotient: {
-		const auto number_1 = WriteaANumber("Введите число = ");
-		const auto number_2 = WriteaANumber("Введите число = ");
-		
-		auto quotient = GetQuotientOfNumbers(number_1, number_2);
-		cout << "\nЧастное " << quotient << endl;
+	case Choice::quotient:
+		GetDivisionOfNumbers(a, b);
 		break;
-	}
 	default:
-		cout << "ошибка!";
+		break;
 	}
-	system("pause");
-	return 0;
 }
 
-double GetSumOfNumbers(const double a, const double b) {
-	return a + b;
+
+void GetSumOfNumbers(const double a, const double b) {
+	cout << a << " + " << b << " = " << a + b;
 }
 
-double GetDifferenceOfNumbers(const double a, const double b) {
-	return a - b;
+void GetDifferenceOfNumbers(const double a, const double b) {
+	cout << a << " - " << b << " = " << a - b;
 }
 
-double GetProductOfNumbers(const double a, const double b) {
-	return a * b;
+void GetMultiplicationOfNumbers(const double a, const double b) {
+	cout << a << " * " << b << " = " << a * b;
 }
-double GetQuotientOfNumbers(const double a, const double b) {
-	return a / b;
-}
-
-double WriteaANumber(const string& message, ostream& out, istream& in) {
-	out << message;
-	double number;
-	in >> number;
-	return number;
+void GetDivisionOfNumbers(const double a, const double b) {
+	cout << a << " / " << b << " = " << a / b;
 }
 
-Result ReadUserChoice(const string& message, ostream& out, istream& in) {
-	out << message;
-	int userInput;
-	in >> userInput;
-	return static_cast<Result>(userInput);
+double WriteaFirstNumber() {
+	double value;
+	cout << "Введите первое число: ";
+	cin >> value;
+	return value;
+}
+
+double WriteaSecondNumber() {
+	double value;
+	cout << "Введите второе число: ";
+	cin >> value;
+	return value;
 }
