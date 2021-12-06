@@ -5,13 +5,13 @@
 using namespace std;
 
 /**
-* \brief Выбор полбзоваателя, будем считать сумму, разность, произведение или частное.
+* \brief Выбор пользователя, будем считать сумму, разность, произведение или частное.
 */
 enum class Choice {
 
 
 	/**
-	* \brief Неправильно выбор.
+	* \brief Неправильный выбор.
 	*/
 	none,
 
@@ -31,13 +31,13 @@ enum class Choice {
 	/**
 	* \brief расчет произведения чисел.
 	*/
-	product,
+	multiplication,
 
 
 	/**
 	* \brief расчет частного чисел.
 	*/
-	quotient,
+	division,
 };
 
 /**
@@ -101,10 +101,10 @@ int main() {
 	case Choice::difference:
 		GetDifferenceOfNumbers(a, b);
 		break;
-	case Choice::product:
+	case Choice::multiplication:
 		GetMultiplicationOfNumbers(a, b);
 		break;
-	case Choice::quotient:
+	case Choice::division:
 		GetDivisionOfNumbers(a, b);
 		break;
 	default:
